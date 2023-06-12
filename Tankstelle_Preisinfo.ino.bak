@@ -1,15 +1,4 @@
 /*  siehe Beschreibung neuer Sketch mit aktuellen Preisen */
-// Einen API-Key erzeugen:       
-// https://creativecommons.tankerkoenig.de  Mit Klicken auf den Reiter API-KEY
-// bekommt man seinen 36stelligen API-Key und trägt ihn in den Folgezeilen ein: 
-#define APIKEY   "xxxxxxxxxxxxxxxxxx"                     // der API-Key von Tanker-König, z.B. "xxxxxx"
-// Eine Tankstellen-id ERMITTELN.
-// https://creativecommons.tankerkoenig.de/json/list.php?lat=53.054&lng=8.2530&rad=5&sort=price&type=diesel&apikey=xxxxxxx
-// Die ausgewählte Tankstellen-ID in der Folgezeile eintragen
-#define TANKID   "yyyyyyyyy"                     // die Tankstellen-ID von Tanker-König 
-// dann noch die Internetverbindung (FritzBox und Password)
-#define FRITZBOX "meinWlan"                                        // oder entsprechende Bezeichnung
-#define PASSWORD "zzzzzzzzz"                                     
 #include <Arduino.h>
 #include <WiFi.h>
 #include <WiFiMulti.h>
@@ -20,11 +9,14 @@
 #include <Adafruit_ST7735.h>
 #include <SPI.h>
 
- 
+#ifndef FRITZBOX
+#define FRITZBOX "meinWlan"                                                     //  WLAN Zugangsdaten
+#define PASSWORD "xxxxxxxxxxxxxxxxxxxx"                                         //  WLAN Passwort
+#endif
 
 // Definieren der PINs fuer das Display
 #define TFT_CS       17   
-#define TFT_RST       4    // else set to -1 and connect to Arduino RESET pin
+#define TFT_RST       4    // set to -1 and connect to Arduino RESET pin
 #define TFT_DC        2       
 Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 
@@ -68,9 +60,9 @@ const uint32_t INTERVALL = 12 * 15000UL;                // 12 * 15000 = 180.000 
 //const uint32_t INTERVALL = 200;                       // 200; // das sind für Testzwecke 0,2 Sekunden
 const uint32_t SCROLLINTERVALL = 240/CHAR_WIDTH;        // 240/6 = 0.040 das sind 0.04 Sekunden = 40 MilliSekunden 
 
-String TankerkoenigApiKey = APIKEY;                          
-String TankstellenID      = TANKID;                           
-                                                              
+// Dein Tankerkoenig ApiKey und die abzufragende TankstellenID         
+String TankerkoenigApiKey = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx";    
+String TankstellenID      = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx";  
                                                                 
 
 const String url = 
