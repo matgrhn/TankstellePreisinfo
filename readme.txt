@@ -92,7 +92,13 @@ Unter Werkzeuge eintragen:
 ESP32 Board: „DOIT ESP32 DEVKIT V1“
 Boardverwalter: „ESP32 Arduino“ -> „DOIT ESP32 DEVKIT V1“.
 
-Wenn es beim Kompilieren noch seltsame Fehler gibt, fehlt vielleicht noch eine Bibliothek, die eingebunden werden muss. Google mal nach diesen Bibliotheken:
+Wenn es beim Kompilieren noch seltsame Fehler gibt, fehlt vielleicht noch eine Bibliothek, die eingebunden werden muss. 
+Einige Bibliotheken lassen sich über den Library-Manager aktivieren, die folgenden musste ich mir sich als Zip-Datei auf Github suchen und herunterladen:
+Adafruit-GFX-Library-Master
+Adafruit-ST7735-Library-Master
+Adafruit_BusIO https://github.com/adafruit/Adafruit_BusIO
+
+Google mal nach diesen Bibliotheken, das sind Kandidaten für fehlende Bibliotheken:
 #include <Arduino.h>
 #include <WiFi.h>
 #include <WiFiMulti.h>
@@ -102,6 +108,11 @@ Wenn es beim Kompilieren noch seltsame Fehler gibt, fehlt vielleicht noch eine B
 #include <Adafruit_GFX.h>
 #include <Adafruit_ST7735.h>
 #include <SPI.h>
+
+Mit dem ESP32 gibt es immer mal Schwierigkeiten
+beim Hochladen. Nach "Connecting..." kommt dann irgendwann ein Fehlercode 2. Es soll helfen, denn Button "Boot" zu drücken oder En und Boot zusammen. Bei mir hat das
+Problem ein 10my Kondensator gelöst, den ich zwischen dem Pin EN und GND gesetzt habe (siehe https://www.youtube.com/watch?v=SlAG6DFLnBE).
+
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
